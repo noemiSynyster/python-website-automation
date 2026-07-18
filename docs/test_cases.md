@@ -8,7 +8,7 @@ Format: ID | Requirement | Description | Precondition | Expected result | Type
 |---|---|---|---|---|
 | TC-API-01 | FR-01 | GET /products returns status code 200 | Status code 200 | Automated |
 | TC-API-02 | FR-01 | The response contains a list of products in `data` | `data` is a non-empty list | Automated |
-| TC-API-03 | FR-02 | GET /products filtered by category returns only products from that category | All returned products belong to the requested category | Pending |
+| TC-API-03 | FR-02 | GET /products filtered by category returns only products from that category | All returned products belong to the requested category | Automated |
 
 ## UI — Authentication
 
