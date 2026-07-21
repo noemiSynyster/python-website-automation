@@ -14,7 +14,7 @@ Format: ID | Requirement | Description | Precondition | Expected result | Type
 
 | ID | Requirement | Description | Precondition | Expected result | Type |
 |---|---|---|---|---|---|
-| TC-UI-01 | FR-05 | Log in with valid credentials | Registered user exists | Redirects to account page, displays username | Pending |
+| TC-UI-01 | FR-05 | Log in with valid credentials | Registered user exists | Redirects to account page, displays username | Automated |
 | TC-UI-02 | FR-06 | Log in with incorrect password | Registered user exists | Displays error message, does not log in | Pending |
 | TC-UI-03 | FR-07 | Log out from an active session | User is logged in | Redirects to login page, session ends | Pending |
 
