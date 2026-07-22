@@ -32,11 +32,14 @@ jobs:
       - name: Set up Chrome
         uses: browser-actions/setup-chrome@v1
 
+      - name: Install Xvfb
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
       - name: Run API tests
         run: pytest tests/api/ -v -s --html=api-report.html --self-contained-html
 
       - name: Run UI tests
-        run: pytest tests/ui/ -v -s --html=ui-report.html --self-contained-html
+        run: xvfb-run --auto-servernum pytest tests/ui/ -v -s --html=ui-report.html --self-contained-html
 
       - name: Upload failure screenshots
         if: failure()

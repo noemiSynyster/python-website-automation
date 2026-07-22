@@ -39,7 +39,6 @@ def driver():
     options.add_experimental_option("useAutomationExtension", False)
 
     if os.getenv("CI"):
-        options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--window-size=1920,1080")
@@ -63,14 +62,14 @@ def driver():
     browser.quit()
 
 
-    @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-    def pytest_runtest_makereport(item, call):
-        outcome = yield
-        report = outcome.get_result()
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
 
-        if report.when == "call" and report.failed:
-            driver = item.funcargs.get("driver")
-            if driver:
-                os.makedirs("screenshots", exist_ok=True)
-                screenshot_path = f"screenshots/{item.name}.png"
-                driver.save_screenshot(screenshot_path)
+    if report.when == "call" and report.failed:
+        driver = item.funcargs.get("driver")
+        if driver:
+            os.makedirs("screenshots", exist_ok=True)
+            screenshot_path = f"screenshots/{item.name}.png"
+            driver.save_screenshot(screenshot_path)
