@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 
 class LoginPage:
@@ -18,7 +19,14 @@ class LoginPage:
         self.driver.get(f"{self.base_url}/auth/login")
 
     def login(self, email, password):
-        email_field = self.wait.until(EC.presence_of_element_located(self.EMAIL_INPUT))
+        try:
+            email_field = self.wait.until(EC.presence_of_element_located(self.EMAIL_INPUT))
+        except TimeoutException:
+            print("PAGE SOURCE AT FAILURE:")
+            print(self.driver.page_source[:2000])
+            print("CURRENT URL AT FAILURE:", self.driver.current_url)
+            raise
+
         email_field.send_keys(email)
 
         password_field = self.driver.find_element(*self.PASSWORD_INPUT)

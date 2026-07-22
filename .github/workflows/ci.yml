@@ -33,7 +33,7 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run API tests
-        run: pytest tests/api/ -v --html=api-report.html --self-contained-html
+        run: pytest tests/api/ -v -s --html=api-report.html --self-contained-html
 
       - name: Run UI tests
         run: pytest tests/ui/ -v --html=ui-report.html --self-contained-html
