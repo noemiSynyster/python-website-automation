@@ -36,7 +36,7 @@ jobs:
         run: pytest tests/api/ -v -s --html=api-report.html --self-contained-html
 
       - name: Run UI tests
-        run: pytest tests/ui/ -v --html=ui-report.html --self-contained-html
+        run: pytest tests/ui/ -v -s --html=ui-report.html --self-contained-html
 
       - name: Upload failure screenshots
         if: failure()

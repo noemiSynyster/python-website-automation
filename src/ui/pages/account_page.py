@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 
 class AccountPage:
@@ -13,7 +14,14 @@ class AccountPage:
         self.wait = WebDriverWait(driver, 10)
 
     def logout(self):
-        menu_button = self.wait.until(EC.element_to_be_clickable(self.USER_MENU_BUTTON))
+        try:
+            menu_button = self.wait.until(EC.element_to_be_clickable(self.USER_MENU_BUTTON))
+        except TimeoutException:
+            print("PAGE SOURCE AT FAILURE:")
+            print(self.driver.page_source[:2000])
+            print("CURRENT URL AT FAILURE:", self.driver.current_url)
+            raise
+
         menu_button.click()
 
         sign_out_link = self.wait.until(EC.element_to_be_clickable(self.SIGN_OUT_LINK))
