@@ -7,6 +7,7 @@ class LoginPage:
     EMAIL_INPUT = (By.ID, "email")
     PASSWORD_INPUT = (By.ID, "password")
     SUBMIT_BUTTON = (By.CSS_SELECTOR, "[data-test='login-submit']")
+    ERROR_MESSAGE = (By.CSS_SELECTOR, "[data-test='login-error']")
 
     def __init__(self, driver, ui_base_url):
         self.driver = driver
@@ -28,3 +29,7 @@ class LoginPage:
 
     def wait_for_redirect_to_account(self):
         self.wait.until(EC.url_contains("/account"))
+
+    def get_error_message_text(self):
+        error_element = self.wait.until(EC.visibility_of_element_located(self.ERROR_MESSAGE))
+        return error_element.text
