@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","0","test_get_products_returns_json_with_data_key","tests.api","2026-07-23","passed","2026-07-23","","test_products","",""
+"","30033","test_login_with_valid_credentials_redirects_to_account_page","tests.ui","2026-07-23","broken","2026-07-23","","test_login","",""
+"","22553","test_logout_from_active_session_redirects_to_login","tests.ui","2026-07-23","broken","2026-07-23","","test_logout","",""
+"","0","test_get_products_returns_200","tests.api","2026-07-23","passed","2026-07-23","","test_products","",""
+"","363","test_get_products_filtered_by_category_returns_only_matching_products","tests.api","2026-07-23","passed","2026-07-23","","test_products","",""
+"","2348","test_login_with_invalid_password_shows_error_message","tests.ui","2026-07-23","passed","2026-07-23","","test_login","",""
