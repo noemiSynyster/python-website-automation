@@ -33,7 +33,7 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run API tests
-        run: pytest tests/api/ -v --html=api-report.html --self-contained-html
+        run: pytest tests/api/ -v --alluredir=allure-results
 
       # UI tests are non-blocking in CI: the target demo site (practicesoftwaretesting.com)
       # is protected by Cloudflare bot detection, which intermittently blocks headless
@@ -41,16 +41,21 @@ jobs:
       # These same tests pass consistently in local execution. See README for details.
       - name: Run UI tests
         continue-on-error: true
-        run: pytest tests/ui/ -v --html=ui-report.html --self-contained-html
+        run: pytest tests/ui/ -v --alluredir=allure-results
 
-      - name: Upload test reports
+      - name: Generate Allure report
+        uses: simple-elf/allure-report-action@v1.9
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_report: allure-report
+
+      - name: Upload Allure report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports
-          path: |
-            api-report.html
-            ui-report.html
+          name: allure-report
+          path: allure-report
 
       - name: Upload failure screenshots
         if: always()
